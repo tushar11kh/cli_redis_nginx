@@ -3,6 +3,9 @@ name: Build, Scan, Deploy
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - '**/README.md'
 
 jobs:
   build-and-scan:
