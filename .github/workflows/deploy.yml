@@ -67,10 +67,10 @@ jobs:
             fi
 
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            docker pull ${{ secrets.DOCKER_USERNAME }}/custom-nginx:latest
-            docker stop nginx_server || true
-            docker rm nginx_server || true
-            docker run -d --name nginx_server -p 80:80 ${{ secrets.DOCKER_USERNAME }}/custom-nginx:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/custom-nginx:latest
+            sudo docker stop nginx_server || true
+            sudo docker rm nginx_server || true
+            sudo docker run -d --name nginx_server -p 80:80 ${{ secrets.DOCKER_USERNAME }}/custom-nginx:latest
           EOF
 
       
