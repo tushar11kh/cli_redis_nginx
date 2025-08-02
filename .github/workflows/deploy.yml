@@ -47,7 +47,7 @@ jobs:
       - name: Deploy via SSH
         run: |  
           ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          
+
             if ! command -v docker &> /dev/null
           then
             echo "Installing Docker..."
@@ -67,7 +67,9 @@ jobs:
             sudo apt-get update
             sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
             fi
+          EOF
 
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/custom-nginx:latest
             sudo docker stop nginx_server || true
             sudo docker rm nginx_server || true
